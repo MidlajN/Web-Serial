@@ -11,46 +11,40 @@ let reader;
 export const requestSerialPort = async () => {
   port = await navigator.serial.requestPort();
   const { usbProductId, usbVendorId } = port.getInfo();
-  console.log(usbProductId, usbVendorId)
-  await port.open({ baudRate: 9600 })
+  console.log(usbProductId, usbVendorId);
+  await port.open({ baudRate: 9600 });
   console.log('Port opened successfully >>>>', port);
 
+  let receivedText = '';
+  reader = port.readable.getReader();
 
-  while (port.readable) {
-    reader = port.readable.getReader();
-    
-    let receivedText = ''
-    // Listen to data coming from the serial device.
-    while (true) {
-      const { value, done } = await reader.read();
-      if (done) {
-
-        // Allow the serial port to be closed later.
-        reader.releaseLock();
-        break;
-      }
-      // value is a Uint8Array.
+  const appendMsg = (msg) => {
+    document.getElementById('outputMsg').value += msg;
+  }
+  const processMessage = async () => {
+    const { value, done } = await reader.read();
+    if (!done) {
       const decoder = new TextDecoder();
       const text = decoder.decode(value);
-
-      // Append the received text to the accumulated text.
       receivedText += text;
 
       const newlineIndex = receivedText.indexOf('\n');
       if (newlineIndex !== -1) {
-        // Extract the complete message.
         const completeMessage = receivedText.substring(0, newlineIndex + 1);
-    
-        // Process the complete message as needed (e.g., print, handle, etc.).
-        console.log(completeMessage);
-    
-        // Remove the processed message from the accumulated text.
         receivedText = receivedText.substring(newlineIndex + 1);
+        appendMsg(completeMessage);
       }
-      
-    } 
-  }
+      // Continue processing messages
+      processMessage();
+    } else {
+      // Allow the serial port to be closed later.
+      reader.releaseLock();
+    }
+  };
+  // Start processing messages
+  processMessage();
 };
+
 
 export const closeSerialPort = async() => {
   if (port) {
@@ -70,6 +64,13 @@ export async function writeSerial() {
   const dataToSend = isToggled ? '1' : '0';
   isToggled = !isToggled;
 
-  await writer.write(encoder.encode(dataToSend));
+  writer.write(encoder.encode(dataToSend)).then(() => {
+    if (dataToSend === '0') {
+      document.getElementById('toggle').innerHTML = `<i class="fa-solid fa-lightbulb" style="color: #c20d0da8"></i>`;
+    } else {
+      document.getElementById('toggle').innerHTML = `<i class="fa-solid fa-lightbulb" style="color: #2f5917"></i>`;
+    }
+    
+  });
   writer.releaseLock();
 }

@@ -5,12 +5,16 @@ import { requestSerialPort, closeSerialPort, writeSerial } from './serial.js'
 
 document.getElementById('serial').addEventListener('click', () => {
     requestSerialPort().then(() => {
-        setTimeout(() => {
-            document.getElementById('serial').style.display = 'none';
-          }, 100);
+        document.getElementById('serial').style.display = 'none';
+        document.getElementById('disconnect').style.display = 'block';
     }).catch((e) => {
         console.log(e)
     })
 })
-document.getElementById('disconnect').addEventListener('click', closeSerialPort)
+document.getElementById('disconnect').addEventListener('click', () => {
+    closeSerialPort().then(() => {
+        document.getElementById('serial').style.display = 'block';
+        document.getElementById('disconnect').style.display = 'none';
+    })
+})
 document.getElementById('toggle').addEventListener('click', writeSerial)

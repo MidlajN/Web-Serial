@@ -13,16 +13,16 @@
     </div>
     <div class="main">
       <div class="window">
-        <div>
+        <div class="btnDiv">
           <span>ESP32</span>
-          <button id="serial" style="margin-left:auto">Click</button>
-          <button id="disconnect">Disconnect</button>
+          <button id="serial" style="margin-left:auto;transition: 0.5s;"><i class="fa-solid fa-plug-circle-check" style="color: #34ea58;"></i> Connect</button>
+          <button id="disconnect" style="display: none;margin-left:auto;transition: 0.5s;"><i class="fa-solid fa-plug-circle-xmark" style="color: #c92626;"></i> Disconnect</button>
         </div>
         <div>
-          <textarea name="" id="" cols="30" rows="10" disabled> dsdfsd &NewLine; fsdfs</textarea>
+          <textarea name="" id="outputMsg" cols="30" rows="10" disabled></textarea>
         </div>
         <div>
-          <button id="toggle" style="margin-left: auto;"><i class="fa-solid fa-lightbulb"></i></button>
+          <button id="toggle" class="" style="margin-left: auto;padding: 5px 25px;"><i class="fa-solid fa-lightbulb" style="color: #c20d0da8"></i></button>
         </div>
       </div>
       

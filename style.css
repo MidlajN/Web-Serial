@@ -66,8 +66,19 @@ body {
   scrollbar-width: none;
   -ms-overflow-style: none; */
 }
-
-
+.window button {
+  margin-left: auto;
+  transition: 0.5s;
+}
+.btnDiv button{
+  min-width: 9vw;
+}
+.disconnectBtn {
+  display: none;
+}
+.lightBtn {
+  color: #bfc20da8;
+}
 
 
 
