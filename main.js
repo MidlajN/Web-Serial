@@ -1,5 +1,5 @@
 import './style.css'
-import { requestSerialPort, closeSerialPort, writeSerial } from './serial.js'
+import { requestSerialPort, closeSerialPort, writeSerial, gcodeToText } from './serial.js'
 
 // getSerial(document.getElementById('serial'))
 
@@ -11,10 +11,16 @@ document.getElementById('serial').addEventListener('click', () => {
         console.log(e)
     })
 })
+
 document.getElementById('disconnect').addEventListener('click', () => {
     closeSerialPort().then(() => {
         document.getElementById('serial').style.display = 'block';
         document.getElementById('disconnect').style.display = 'none';
     })
+})
+
+
+document.getElementById('upload-gcode').addEventListener('click', () => {
+    gcodeToText(document.getElementById('gcode-input'))
 })
 document.getElementById('toggle').addEventListener('click', writeSerial)

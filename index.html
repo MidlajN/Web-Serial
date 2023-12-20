@@ -15,14 +15,20 @@
       <div class="window">
         <div class="btnDiv">
           <span>ESP32</span>
-          <button id="serial" style="margin-left:auto;transition: 0.5s;"><i class="fa-solid fa-plug-circle-check" style="color: #34ea58;"></i> Connect</button>
-          <button id="disconnect" style="display: none;margin-left:auto;transition: 0.5s;"><i class="fa-solid fa-plug-circle-xmark" style="color: #c92626;"></i> Disconnect</button>
+          <button id="serial" style="margin-left:auto;transition: 0.5s;padding: 5px 25px;"><i class="fa-solid fa-plug-circle-check" style="color: #34ea58;"></i> Connect</button>
+          <button id="disconnect" style="display: none;margin-left:auto;transition: 0.5s;padding: 5px 25px;"><i class="fa-solid fa-plug-circle-xmark" style="color: #c92626;"></i> Disconnect</button>
+          <button id="toggle" class="" style="margin-left:10px;padding: 5px 25px;"><i class="fa-solid fa-lightbulb" style="color: #c20d0da8"></i></button>
         </div>
         <div>
           <textarea name="" id="outputMsg" cols="30" rows="10" disabled></textarea>
         </div>
         <div>
-          <button id="toggle" class="" style="margin-left: auto;padding: 5px 25px;"><i class="fa-solid fa-lightbulb" style="color: #c20d0da8"></i></button>
+          <label class="uploadFile" for="gcode-input">
+            <i class="fa-solid fa-file-circle-plus"></i>
+            <span>Upload G-Code</span>
+          </label>
+          <input type="file" id="gcode-input"/>
+          <button id="upload-gcode" class="" style="margin-left: auto;padding: 5px 25px;"><i class="fa-solid fa-upload"></i></button>
         </div>
       </div>
       

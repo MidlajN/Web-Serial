@@ -1,13 +1,13 @@
+
+let port;
+let reader;
+
 /**
  * Retrieves the serial port for the given element and listens for data from the serial device.
  *
  * @param {Element} element - The element to attach the click event listener to.
  * @return {void}
  */
-
-let port;
-let reader;
-
 export const requestSerialPort = async () => {
   port = await navigator.serial.requestPort();
   const { usbProductId, usbVendorId } = port.getInfo();
@@ -73,4 +73,21 @@ export async function writeSerial() {
     
   });
   writer.releaseLock();
+}
+
+
+export const gcodeToText = async (fileInput) => {
+
+  const file = fileInput.files[0];
+  const encoder = new TextEncoder();
+  const writer = port.writable.getWriter();
+
+  if (file) {
+    const gcodeText = await file.text();
+    await writer.write(encoder.encode(gcodeText));
+    writer.releaseLock();
+    console.log('Gcode sent successfully >>>>', gcodeText);
+  } else {
+    console.error('No file selected');
+  }
 }

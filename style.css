@@ -55,7 +55,12 @@ body {
 }
 .window div:nth-child(3) {
   display: flex;
+  align-items: center;
 }
+.window div:nth-child(3) input[type="file"] {
+  display: none;
+}
+
 .window textarea {
   width: 100%;
   background-color: #e5e5f796;
@@ -67,12 +72,12 @@ body {
   -ms-overflow-style: none; */
 }
 .window button {
-  margin-left: auto;
+  /* margin-left: auto; */
   transition: 0.5s;
 }
-.btnDiv button{
+/* .btnDiv button{
   min-width: 9vw;
-}
+} */
 .disconnectBtn {
   display: none;
 }
@@ -81,17 +86,33 @@ body {
 }
 
 
+.uploadFile {
+  display: flex;
+  align-items: center;
+  border-radius: 7px;
+  border: 1px solid #87878745;
+  /* padding-right: 30px; */
+  cursor:pointer;
+}
+.uploadFile i {
+  background-color: #85d49d66;
+  padding: 6px 21px;
+  border-top-left-radius: 7px;
+  border-bottom-left-radius: 7px;
+}
 
-
-
-
+.uploadFile span {
+  font-size: 12px;
+  padding-inline: 15px;
+  color: #00000094;
+}
 
 
 
 button {
   border-radius: 8px;
   border: 1px solid transparent;
-  padding: 0.6em 1.2em;
+  /* padding: 0.6em 1.2em; */
   font-size: 1em;
   font-weight: 500;
   font-family: inherit;
